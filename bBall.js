@@ -1,8 +1,8 @@
 function simulateMouseEvent(target, options = {}, type) {
 
-    var event = target.ownerDocument.createEvent('MouseEvents'); // MouseEvents event type
+    const event = target.ownerDocument.createEvent('MouseEvents'); // MouseEvents event type
 
-    var opts = {
+    const opts = {
         type: type,
         canBubble: true,
         cancelable: true,
@@ -46,7 +46,6 @@ var canvas  = document.querySelector('canvas');
 var x       = window.innerWidth / 2;
 var y       = window.innerHeight;
 
-
 /**
  * Shoots a ball
  * 
@@ -61,23 +60,23 @@ function bBall() {
  * 
  * @param {int} mainIntervalTime Time in miliseconds for the main interval
  * @param {int} ballsNumber Number of balls to shoot each interval
- * @param {int} timeBetweenBalls time in miliseconds between the ball shooting
+ * @param {int} timeBetweenBalls time in miliseconds between shootings
+ * @param {int} maxShoots max ammount of shoots to make before killing the interval
  */
-function bBallSequence(mainIntervalTime, ballsNumber, timeBetweenBalls){
-    var shootCounter = 0;
-    var maxShoots = 15;
-    var sequenceInterval = setInterval(function () {
-        for (let i = 0; i < ballsNumber; i++) {            
-            setTimeout(() => {
-                bBall();
-                shootCounter ++;                
-                if(shootCounter == maxShoots) clearInterval(sequenceInterval);
+function bBallSequence(mainIntervalTime, ballsNumber, timeBetweenBalls, maxShoots){
+    let shootCounter = 0;    
+    const sequenceInterval = setInterval(() => {
+        for (let i = 0; i < ballsNumber; i++) {     
+            setTimeout(() => {                
+                shootCounter ++;    
+                shootCounter === maxShoots ? clearInterval(sequenceInterval) : bBall();                                
             }, timeBetweenBalls * i);
         }        
     }, mainIntervalTime);    
 }
 
-bBallSequence(1750, 3, 200);
+// Init ball sequence
+bBallSequence(1750, 3, 200, 20);
 
 
 
