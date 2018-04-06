@@ -1,7 +1,7 @@
 function simulateMouseEvent(target, options = {}, type) {
 
-    const event = target.ownerDocument.createEvent('MouseEvents'); // MouseEvents event type
-
+    const event = target.ownerDocument.createEvent('MouseEvents'); 
+    
     const opts = {
         type: type,
         canBubble: true,
@@ -42,15 +42,14 @@ function simulateMouseEvent(target, options = {}, type) {
     target.dispatchEvent(event);
 };
 
-var canvas  = document.querySelector('canvas');
-var x       = window.innerWidth / 2;
-var y       = window.innerHeight;
-
 /**
  * Shoots a ball
  * 
  */
 function bBall() {
+    const canvas  = document.querySelector('canvas');
+    const x       = window.innerWidth / 2;
+    const y       = window.innerHeight;
     simulateMouseEvent(canvas, { clientX: x, clientY: y * 0.68 }, 'mousedown');
     simulateMouseEvent(canvas, { clientX: x, clientY: y * 0.43 }, 'mouseup');
 }
