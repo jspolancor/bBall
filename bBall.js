@@ -1,7 +1,7 @@
-function simulateMouseEvent(target, options = {}, type) {
+function simulateMouseEvent(target, options, type) {
 
     const event = target.ownerDocument.createEvent('MouseEvents'); 
-    
+
     const opts = {
         type: type,
         canBubble: true,
